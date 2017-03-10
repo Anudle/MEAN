@@ -110,7 +110,7 @@ router.post('/posts/:post/comments', function(req, res, next) {
         }
         req.post.comments.push(comment);
         req.post.save(function(err, post) {
-            if (err) Preturn next(err);
+            if (err) return next(err);
 
             res.json(comment);
         })
