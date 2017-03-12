@@ -36,7 +36,6 @@ router.get('/posts', function(req, res, next) {
         if (err) {
             return next(err);
         }
-
         res.json(posts);
     })
 })
