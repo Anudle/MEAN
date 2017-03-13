@@ -3,8 +3,6 @@ var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-
-
 var UserSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -18,7 +16,6 @@ var UserSchema = new mongoose.Schema({
 
 UserSchema.methods.validPassword = function(password) {
     var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
-
     return this.hash === hash;
 }
 
@@ -36,6 +33,6 @@ UserSchema.methods.generateJWT = function() {
         _id: this._id,
         username: this.username,
         exp: parseInt(exp.getTime() / 1000),
-    }, process.env.secret)
+    }, 'process.env.secret')
 }
 mongoose.model('User', UserSchema);
